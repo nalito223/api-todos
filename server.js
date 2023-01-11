@@ -18,6 +18,8 @@ app.get('/todos', (request, response) => {
   response.status(200).json(app.locals.todos)
 })
 
+
+
 app.get('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
   const foundTodo = app.locals.todos.find(idea => idea.id === id)
@@ -29,7 +31,7 @@ app.get('/todos/:id', (request, response) => {
   response.status(200).json(foundTodo)
 })
 
-app.post('/todo', (request, response) => {
+app.post('/todos', (request, response) => {
   const submittedTodo = request.body
 
   for (let requiredParameter of ['title', 'description', 'date', 'status', 'url', 'asignees']) {
@@ -38,13 +40,22 @@ app.post('/todo', (request, response) => {
     }
   }
 
+  app.put('/todos/:id', checkTodoExists, (req, res) => {
+    const { id } = request.params
+    const { todoBody } = req.body
+
+    let todo = todos.find(todo => todo.id == id)
+    todo = todoBody
+    return res.json(todo)
+  })
+
   submittedTodo.id = Date.now()
   app.locals.todos.push(submittedTodo)
 
   response.status(201).json(submittedTodo)
 })
 
-app.delete('/todo/:id', (request, response) => {
+app.delete('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
   const filteredTodo = app.locals.todos.filter(todo => todo.id !== id)
   app.locals.todos = filteredTodo
