@@ -40,14 +40,14 @@ app.post('/todos', (request, response) => {
     }
   }
 
-  app.put('/todos/:id', checkTodoExists, (req, res) => {
-    const { id } = request.params
-    const { todoBody } = req.body
+  // app.put('/todos/:id', checkTodoExists, (req, res) => {
+  //   const { id } = request.params
+  //   const { title } = req.body
 
-    let todo = todos.find(todo => todo.id == id)
-    todo = todoBody
-    return res.json(todo)
-  })
+  //   const todo = todos.find(todo => todo.id == id)
+  //   todo.title = title
+  //   return res.json(todo)
+  // })
 
   submittedTodo.id = Date.now()
   app.locals.todos.push(submittedTodo)
