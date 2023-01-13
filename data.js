@@ -1,22 +1,19 @@
 const data = [
   {
-    id: 1, title: 'title 1', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'backlog', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["John"]
+    id: "1", content: 'Do thing 1', date: '2018-07-22', status: 'done', destination: { droppableId: "column-4", index: 1}
   },
   {
-    id: 2, title: 'title 2', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'on deck', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["John", "Taylor"]
+    id: "6", content: 'Do thing 6', date: '2018-07-22', status: 'done', destination: { droppableId: "column-4", index: 0}
   },
   {
-    id: 3, title: 'title 3', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'in progress', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["John", "Taylor"]
+    id: "2", content: 'Do thing 2', date: '2018-07-22', status: 'backlog', destination: { droppableId: "column-1", index: 0}
   },
   {
-    id: 4, title: 'title 4', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'complete', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["Taylor"]
+    id: "3", content: 'Do thing 3', date: '2018-07-22', status: 'in progress', destination: { droppableId: "column-3", index: 0}
   },
   {
-    id: 5, title: 'title 5', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'backlog', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["John", "Taylor"]
+    id: "4", content: 'Do thing 4', date: '2018-07-22', status: 'on deck', destination: { droppableId: "column-2", index: 0}
   },
-  {
-    id: 6, title: 'title 6', description: 'This is a description. This is a task that needs to be done', date: '2018-07-22', status: 'backlog', url: 'https://httpstatusdogs.com/img/200.jpg', asignees: ["Taylor"]
-  }
 ]
 
 module.exports = data

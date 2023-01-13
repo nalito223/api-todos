@@ -18,8 +18,6 @@ app.get('/todos', (request, response) => {
   response.status(200).json(app.locals.todos)
 })
 
-
-
 app.get('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
   const foundTodo = app.locals.todos.find(idea => idea.id === id)
@@ -34,22 +32,17 @@ app.get('/todos/:id', (request, response) => {
 app.post('/todos', (request, response) => {
   const submittedTodo = request.body
 
-  for (let requiredParameter of ['title', 'description', 'date', 'status', 'url', 'asignees']) {
+  for (let requiredParameter of ['content', 'date', 'status', 'destination']) {
     if (!submittedTodo[requiredParameter]) {
-      return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.`})
+      return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.` })
     }
   }
 
-  // app.put('/todos/:id', checkTodoExists, (req, res) => {
-  //   const { id } = request.params
-  //   const { title } = req.body
 
-  //   const todo = todos.find(todo => todo.id == id)
-  //   todo.title = title
-  //   return res.json(todo)
-  // })
 
-  submittedTodo.id = Date.now()
+  // submittedTodo.id = Date.now()
+  // submittedTodo.id = String(Date.now())
+  submittedTodo.id = String(app.locals.todos.length)
   app.locals.todos.push(submittedTodo)
 
   response.status(201).json(submittedTodo)
@@ -57,10 +50,24 @@ app.post('/todos', (request, response) => {
 
 app.delete('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
-  const filteredTodo = app.locals.todos.filter(todo => todo.id !== id)
+  const filteredTodo = app.locals.todos.filter(todo => String(todo.id) !== String(id))
   app.locals.todos = filteredTodo
 
   response.status(200).json(app.locals.todos)
+})
+
+app.put('/todos/:id', (req, res) => {
+  const { id } = req.params
+  const { content, status, date, destination } = req.body
+
+  const todo = todos.find(todo => todo.id == id)
+
+  todo.content = content
+  todo.date = date
+  todo.status = status
+  todo.destination = destination
+
+  return res.json(todo)
 })
 
 module.exports = app
