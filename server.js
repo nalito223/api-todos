@@ -29,27 +29,68 @@ app.get('/todos/:id', (request, response) => {
   response.status(200).json(foundTodo)
 })
 
-app.post('/todo', (request, response) => {
+app.post('/todos', (request, response) => {
   const submittedTodo = request.body
 
-  for (let requiredParameter of ['title', 'description', 'date', 'status', 'url', 'asignees']) {
+  for (let requiredParameter of ['content', 'date', 'status', 'destination']) {
     if (!submittedTodo[requiredParameter]) {
-      return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.`})
+      return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.` })
     }
   }
 
-  submittedTodo.id = Date.now()
+
+
+  // submittedTodo.id = Date.now()
+  submittedTodo.id = String(Date.now())
+  // submittedTodo.id = String(app.locals.todos.length)
   app.locals.todos.push(submittedTodo)
 
   response.status(201).json(submittedTodo)
 })
 
-app.delete('/todo/:id', (request, response) => {
+app.delete('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
-  const filteredTodo = app.locals.todos.filter(todo => todo.id !== id)
+  const filteredTodo = app.locals.todos.filter(todo => String(todo.id) !== String(id))
   app.locals.todos = filteredTodo
 
   response.status(200).json(app.locals.todos)
 })
 
-module.exports = app
+// app.put('/todos/:id', (req, res) => {
+//   const { id } = req.params
+//   const { content, status, date, destination } = req.body
+
+//   const todo = todos.find(todo => todo.id == id)
+
+// console.log("LOOK HERE", todo)
+// console.log("Content", content)
+// console.log("type of content", typeof content)
+//   todo.content = content 
+//   todo.date = date 
+//   todo.status = status
+//   todo.destination = destination 
+
+//   return res.json(todo)
+
+// })
+
+app.put('/todos/:id', (req, res) => {
+  const { id } = req.params
+  const { content, status, date, destination } = req.body
+  const todo = todos.find(todo => todo.id == id)
+  console.log("LOOK HERE", todo)
+  console.log("Content", content)
+  console.log("type of content", typeof content)
+  const secondAttempt = app.locals.todos.find(todo => todo.id == id)
+  console.log("SECOND ATTEMPT", secondAttempt)
+  console.log("SECONDATTEMPT.CONTENT", secondAttempt.content)
+  console.log("changing content 2nd attempt", secondAttempt.content)
+
+  secondAttempt.destination = destination
+
+  return res.json(secondAttempt)
+
+})
+
+
+// module.exports = app
