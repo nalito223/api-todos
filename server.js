@@ -77,27 +77,16 @@ app.delete('/todos/:id', (request, response) => {
 app.put('/todos/:id', (req, res) => {
   const { id } = req.params
   const { content, status, date, destination } = req.body
-
   const todo = todos.find(todo => todo.id == id)
-
   console.log("LOOK HERE", todo)
   console.log("Content", content)
   console.log("type of content", typeof content)
   const secondAttempt = app.locals.todos.find(todo => todo.id == id)
   console.log("SECOND ATTEMPT", secondAttempt)
   console.log("SECONDATTEMPT.CONTENT", secondAttempt.content)
-  // secondAttempt.content = 'changing this'
   console.log("changing content 2nd attempt", secondAttempt.content)
 
   secondAttempt.destination = destination
-
-
-  // console.log("TODO.CONTENT", todo.content)
-
-  // todo.content = content
-  // todo.date = date
-  // todo.status = status
-  // todo.destination = destination
 
   return res.json(secondAttempt)
 
