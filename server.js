@@ -41,8 +41,8 @@ app.post('/todos', (request, response) => {
 
 
   // submittedTodo.id = Date.now()
-  // submittedTodo.id = String(Date.now())
-  submittedTodo.id = String(app.locals.todos.length)
+  submittedTodo.id = String(Date.now())
+  // submittedTodo.id = String(app.locals.todos.length)
   app.locals.todos.push(submittedTodo)
 
   response.status(201).json(submittedTodo)
@@ -56,18 +56,52 @@ app.delete('/todos/:id', (request, response) => {
   response.status(200).json(app.locals.todos)
 })
 
+// app.put('/todos/:id', (req, res) => {
+//   const { id } = req.params
+//   const { content, status, date, destination } = req.body
+
+//   const todo = todos.find(todo => todo.id == id)
+
+// console.log("LOOK HERE", todo)
+// console.log("Content", content)
+// console.log("type of content", typeof content)
+//   todo.content = content 
+//   todo.date = date 
+//   todo.status = status
+//   todo.destination = destination 
+
+//   return res.json(todo)
+
+// })
+
 app.put('/todos/:id', (req, res) => {
   const { id } = req.params
   const { content, status, date, destination } = req.body
 
   const todo = todos.find(todo => todo.id == id)
 
-  todo.content = content
-  todo.date = date
-  todo.status = status
-  todo.destination = destination
+  console.log("LOOK HERE", todo)
+  console.log("Content", content)
+  console.log("type of content", typeof content)
+  const secondAttempt = app.locals.todos.find(todo => todo.id == id)
+  console.log("SECOND ATTEMPT", secondAttempt)
+  console.log("SECONDATTEMPT.CONTENT", secondAttempt.content)
+  // secondAttempt.content = 'changing this'
+  console.log("changing content 2nd attempt", secondAttempt.content)
 
-  return res.json(todo)
+  secondAttempt.destination = destination
+
+
+  // console.log("TODO.CONTENT", todo.content)
+
+  // todo.content = content
+  // todo.date = date
+  // todo.status = status
+  // todo.destination = destination
+
+  return res.json(secondAttempt)
+
 })
 
-module.exports = app
+
+// module.exports = app
