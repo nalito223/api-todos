@@ -49,8 +49,12 @@ app.delete('/todos/:id', (request, response) => {
 
 app.put('/todos/:id', (req, res) => {
   const { id } = req.params
-  const { content, status, date, destination } = req.body
-  const secondAttempt = app.locals.todos.find(todo => todo.id == id)
-  secondAttempt.destination = destination
-  return res.json(secondAttempt)
+  const { content, date, destination } = req.body
+  const updatedTask = app.locals.todos.find(todo => todo.id == id)
+  updatedTask.destination  = destination
+  updatedTask.date = date 
+  updatedTask.content = content 
+  return res.json(updatedTask)
 })
+
+module.exports = app;
