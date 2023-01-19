@@ -19,7 +19,9 @@ app.get('/todos', (request, response) => {
 })
 
 app.get('/todos/:id', (request, response) => {
-  const id = request.params.id
+  const id = parseInt(request.params.id)
+  console.log("GET ID", id)
+  console.log("APP.LOCALS.TODO", app.locals.todos)
   const foundTodo = app.locals.todos.find(idea => idea.id === id)
   if (!foundTodo) {
     return response.status(404).json({ message: `Sorry, no todo found with an id of ${id}` })
@@ -29,7 +31,6 @@ app.get('/todos/:id', (request, response) => {
 
 app.post('/todos', (request, response) => {
   const submittedTodo = request.body
-
   for (let requiredParameter of ['content', 'date', 'status', 'destination']) {
     if (!submittedTodo[requiredParameter]) {
       return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.` })
@@ -48,15 +49,15 @@ app.delete('/todos/:id', (request, response) => {
 })
 
 app.put('/todos/:id', (req, res) => {
-  const { id } = req.params.id
-  console.log("PUT ID", id)
+  // const { id } = req.params
+  const id = parseInt(req.params.id)
   const { content, date, destination } = req.body
+  // const updatedTask = app.locals.todos.find(todo => todo.id == id)
   const updatedTask = app.locals.todos.find(todo => String(todo.id) == String(id))
-  console.log("PUT TASK BEFORE", updatedTask)
-  updatedTask.destination  = destination
+  console.log("UPDATEDTASK", updatedTask)
+  updatedTask.destination = destination
   updatedTask.date = date 
   updatedTask.content = content 
-  console.log("PUT TASK AFTER", updatedTask)
   return res.json(updatedTask)
 })
 
