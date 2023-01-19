@@ -51,7 +51,7 @@ app.put('/todos/:id', (req, res) => {
   const { id } = req.params
   const { content, date, destination } = req.body
   const updatedTask = app.locals.todos.find(todo => todo.id == id)
-  updatedTask.destination  = destination
+  updatedTask.destination = destination
   updatedTask.date = date 
   updatedTask.content = content 
   return res.json(updatedTask)
