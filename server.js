@@ -42,7 +42,7 @@ app.post('/todos', (request, response) => {
 })
 
 app.delete('/todos/:id', (request, response) => {
-  const id = parseInt(request.params.id)
+  const id = request.params.id
   const filteredTodo = app.locals.todos.filter(todo => String(todo.id) !== String(id))
   app.locals.todos = filteredTodo
   response.status(200).json(app.locals.todos)
