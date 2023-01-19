@@ -9,6 +9,8 @@ app.use(express.json())
 app.locals.title = 'Todos API'
 app.locals.todos = todos
 
+console.log("LOOK HERE", app.locals.todos)
+
 app.set('port', 3001)
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is now running on ${app.get('port')}!`)
@@ -53,6 +55,7 @@ app.put('/todos/:id', (req, res) => {
   const id = parseInt(req.params.id)
   const { content, date, destination } = req.body
   // const updatedTask = app.locals.todos.find(todo => todo.id == id)
+  // const updatedTask = app.locals.todos.find(todo => String(todo.id) == String(id))
   const updatedTask = app.locals.todos.find(todo => String(todo.id) == String(id))
   console.log("UPDATEDTASK", updatedTask)
   updatedTask.destination = destination
@@ -60,5 +63,24 @@ app.put('/todos/:id', (req, res) => {
   updatedTask.content = content 
   return res.json(updatedTask)
 })
+
+// app.put('/todos/:id', async (req, res) => {
+//   try {
+//     const { content, date, destination } = req.body
+//     const updatedTask = await todos('data')
+//       .where({ id: req.params.id })
+//       .update({ content, date, destination  })
+//       .returning(['id', 'date', 'content', 'status', "destination"])
+
+//     if (!updatedTask.length) {
+//       res.status(400)
+//       return res.json({ message: 'Ticket not found' })
+//     }
+
+//     res.status(200).json(updatedTask)
+//   } catch (err) {
+//     res.status(500).json({ message: 'Error updating ticket', error: err })
+//   }
+// })
 
 module.exports = app;
