@@ -56,3 +56,5 @@ app.put('/todos/:id', (req, res) => {
   updatedTask.content = content 
   return res.json(updatedTask)
 })
+
+module.exports = app;
