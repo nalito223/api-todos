@@ -1,4 +1,4 @@
-const data = [
+const todos = [
   {
     id: "1", content: 'Return library books 📚', date: '2023-01-13', status: 'done', destination: { droppableId: "column-3", index: 1 }
   },
@@ -16,4 +16,4 @@ const data = [
   },
 ]
 
-module.exports = data
+module.exports = todos
