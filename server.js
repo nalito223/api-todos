@@ -31,7 +31,6 @@ app.get('/todos/:id', (request, response) => {
 
 app.post('/todos', (request, response) => {
   const submittedTodo = request.body
-
   for (let requiredParameter of ['content', 'date', 'status', 'destination']) {
     if (!submittedTodo[requiredParameter]) {
       return response.status(422).json({ message: `Body is missing required parameter of ${requiredParameter}.` })
@@ -50,9 +49,11 @@ app.delete('/todos/:id', (request, response) => {
 })
 
 app.put('/todos/:id', (req, res) => {
-  const { id } = req.params
+  // const { id } = req.params
+  const id = parseInt(req.params.id)
   const { content, date, destination } = req.body
-  const updatedTask = app.locals.todos.find(todo => todo.id == id)
+  // const updatedTask = app.locals.todos.find(todo => todo.id == id)
+  const updatedTask = app.locals.todos.find(todo => String(todo.id) == String(id))
   console.log("UPDATEDTASK", updatedTask)
   updatedTask.destination = destination
   updatedTask.date = date 
