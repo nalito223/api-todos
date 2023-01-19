@@ -20,6 +20,8 @@ app.get('/todos', (request, response) => {
 
 app.get('/todos/:id', (request, response) => {
   const id = parseInt(request.params.id)
+  console.log("GET ID", id)
+  console.log("APP.LOCALS.TODO", app.locals.todos)
   const foundTodo = app.locals.todos.find(idea => idea.id === id)
   if (!foundTodo) {
     return response.status(404).json({ message: `Sorry, no todo found with an id of ${id}` })
@@ -51,6 +53,7 @@ app.put('/todos/:id', (req, res) => {
   const { id } = req.params
   const { content, date, destination } = req.body
   const updatedTask = app.locals.todos.find(todo => todo.id == id)
+  console.log("UPDATEDTASK", updatedTask)
   updatedTask.destination = destination
   updatedTask.date = date 
   updatedTask.content = content 
