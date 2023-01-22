@@ -9,8 +9,6 @@ app.use(express.json())
 app.locals.title = 'Todos API'
 app.locals.todos = todos
 
-console.log("LOOK HERE", app.locals.todos)
-
 app.set('port', 3001)
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is now running on ${app.get('port')}!`)
