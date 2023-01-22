@@ -17,4 +17,4 @@ The back-end is an Express API serverless function [deployed](https://api-todos.
 | `http://localhost:3001/todos` | GET | not needed | An array containing all existing todos |
 | `http://localhost:3001/todos/:id` | GET | not needed | The requested todo object: `{id: <String> , content: <String>,  date: <String>, destination: {droppableId: <String>, index: <Number>}` |
 | `http://localhost:3001/todos/` | POST | `{content: <String>,  date: <String>, destination: {droppableId: <String>, index: <Number>}` | Created object: `{id: <String> , content: <String>,  date: <String>, destination: {droppableId: <String>, index: <Number>}` |
-| `http://localhost:3001/todos/:id` | DELETE | not needed |  An array containing all existing art pieces reflecting the new data without the deleted piece |
+| `http://localhost:3001/todos/:id` | DELETE | not needed |  An array containing all existing todos reflecting the new data without the deleted todo |
