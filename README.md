@@ -2,7 +2,7 @@
 
 This app is the back-end server for the [Todos showcase project](https://todos-tau-nine.vercel.app/)
 
-The back-end is an Express API serverless function [deployed](https://olivia-ruth-arts-api.vercel.app/art) on Vercel. 
+The back-end is an Express API serverless function [deployed](https://api-todos.vercel.app/todos/) on Vercel. 
 
 ### Installation
 - Clone down this repo, and cd into it.
